@@ -18,6 +18,7 @@ isPlaying = False
 
 # VLC ILE VIDEO OYNATMA FONKSIYONU
 def videoOynat(urladresi):
+    global player
     video = pafy.new(urladresi)
     best = video.getbest()
     playurl = best.url
@@ -30,7 +31,7 @@ def videoOynat(urladresi):
 
 # KULLANICIDAN VERI ALMA
 def kullanicidanVeriAl(string):
-    return input(string)
+    return input(colored(string, 'yellow'))
 
 url = kullanicidanVeriAl("Lütfen YouTube Link Yapıştırın:")
 
@@ -43,21 +44,26 @@ if url.__contains__("https://www.youtube.com/watch?v") :
     videoOynat(url)
     isPlaying = True
 else:
-     print("HATA VIDEO OYNATILAMADI")
+     print("Hata: %s" %colored("Girdiğiniz Video Linki doğru değil", 'red'))
      konus("Hata Girdiğiniz Video Linki doğru değil")
 
 # KULLANICININ GIRDIGI URL
 def suandaCalaniYazdir(degisken):
     
-    return print("Şuanda Caliyor: %s" %colored(degisken, 'green'))
+    return print("Şuanda Caliyor: %s" %colored(degisken, 'green')) 
 
 # PROGRAM TERMINAL KAPANMASIN DIYE WHILE YAPTIRDIM
-while True:
+
+durumlar = ["State.Playing", "State.NothingSpecial", "State.Opening"]
+while str(player.get_state()) in durumlar:
     try:
         if isPlaying:
-            suandaCalaniYazdir(url)
+            isPlaying = isPlaying
+           # suandaCalaniYazdir(format(player.get_state())) - kaldırıldı isterseniz ekleyebilirsiniz
         else:
+           
             break;
     except:
         break;
+player.stop()
 
