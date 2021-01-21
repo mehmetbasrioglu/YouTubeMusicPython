@@ -50,7 +50,7 @@ else:
 # KULLANICININ GIRDIGI URL
 def suandaCalaniYazdir(degisken):
     
-    return print("Şuanda Caliyor: %s" %colored(degisken, 'green')) 
+    return print("Şuanda Çalıyor: %s" %colored(degisken, 'green')) 
 
 # PROGRAM TERMINAL KAPANMASIN DIYE WHILE YAPTIRDIM
 
